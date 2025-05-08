@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+env/
+
+# dotenv environment file
+.env
+
+# Firebase service key or any secrets
+secrets/
+*serviceAccountKey.json
+
+# VS Code settings (optional)
+.vscode/
+
+# Logs
+*.log
+
+# OS / system files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,19 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from backend.api.profile import router as profile_router
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # TODO: restrict to frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(profile_router, prefix="/api")
+
+@app.get("/")
+def read_root():
+    return {"message": "Backend is running!"}
