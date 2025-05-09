@@ -3,8 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { 
   Star, 
-  GitFork, 
-  Eye,
+  GitFork,
   Clock,
   ExternalLink
 } from 'lucide-react';
