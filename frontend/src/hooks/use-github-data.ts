@@ -13,7 +13,7 @@ export const useGitHubData = (username: string | null) => {
       setIsLoading(true);
       setError(null);
       try {
-        const res = await axios.get(`http://localhost:8000/api/profile/${username}`);
+        const res = await axios.get(`https://pushfolio.onrender.com/api/profile/${username}`);
         setData(res.data.data); // backend returns { source, data }
       } catch (err: any) {
         setError('Failed to fetch profile');

@@ -20,7 +20,7 @@ const GitHubProfiler = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
-        GitHub Portfolio Visualizer
+        Pushfolio | AI-Powered GitHub Portfolio
       </h1>
       
       <SearchInput onSubmit={handleSubmit} />
