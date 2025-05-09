@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Query
 from datetime import datetime, timedelta, timezone
-from backend.firestore import db
-from backend.github_fetcher import fetch_github_user, fetch_github_repos, fetch_repo_languages
-from backend.openai_client import generate_profile_summary
+from firestore import db
+from github_fetcher import fetch_github_user, fetch_github_repos, fetch_repo_languages
+from openai_client import generate_profile_summary
 
 router = APIRouter()
 
@@ -108,7 +108,7 @@ async def get_profile(username: str, forceRefresh: bool = Query(False)):
         },
         "languages": languages
     }
-    
+
     # Save to Firestore
     profile["lastUpdated"] = datetime.now(timezone.utc).isoformat()
     doc_ref.set(profile)
