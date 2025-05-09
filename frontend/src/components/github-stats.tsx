@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BarChart, PieChart, Code } from 'lucide-react';
+import { BarChart, Code } from 'lucide-react';
 import { LanguageStats } from '@/components/stats/language-stats';
 import { CodeMetrics } from '@/components/stats/code-metrics';
 import type { GitHubStatistics } from '@/types/github';

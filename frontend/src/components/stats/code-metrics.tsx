@@ -1,9 +1,7 @@
 import { Card } from '@/components/ui/card';
 import type { CodeMetricsData } from '@/types/github';
 import { 
-  FileCode2, 
   GalleryVerticalEnd, 
-  CalendarDays,
   Users,
   Star
 } from 'lucide-react';

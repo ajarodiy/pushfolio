@@ -4,7 +4,6 @@ import {
   PieChart,
   ResponsiveContainer,
   Cell,
-  Legend,
   Tooltip,
 } from 'recharts';
 import type { LanguageData } from '@/types/github';
