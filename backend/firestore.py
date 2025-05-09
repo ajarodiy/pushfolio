@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from google.cloud import firestore
 from google.oauth2 import service_account
 
-load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
+load_dotenv(dotenv_path=dotenv_path)
 
 key_path = os.getenv("FIREBASE_CREDENTIAL_PATH")
 if not key_path:
