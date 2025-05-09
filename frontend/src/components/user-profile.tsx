@@ -19,7 +19,7 @@ export const UserProfile = ({ user }: UserProfileProps) => {
           <div className="flex flex-col md:flex-row gap-6">
             <Avatar className="h-32 w-32 border-4 border-card bg-card rounded-full">
               <AvatarImage src={user.avatarUrl} alt={user.name} />
-              <AvatarFallback className="text-4xl">{user.name.charAt(0)}</AvatarFallback>
+              <AvatarFallback className="text-4xl">{user.name?.charAt(0) ?? '?'}</AvatarFallback>
             </Avatar>
             
             <div className="space-y-3 flex-1">
