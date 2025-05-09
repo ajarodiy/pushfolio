@@ -6,7 +6,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://pushfolio.vercel.app", "https://ajarodiy.me", "https://ajarodiy.me"],
+    allow_origins=["https://pushfolio.vercel.app", "https://www.ajarodiy.me", "https://ajarodiy.me"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
