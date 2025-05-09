@@ -1,9 +1,0 @@
-{
-    "rewrites": [
-      {
-        "source": "/pushfolio/:path*",
-        "destination": "/:path*"
-      }
-    ]
-  }
-  
