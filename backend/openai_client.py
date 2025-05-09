@@ -49,7 +49,7 @@ def build_prompt(profile: dict) -> str:
 You are an AI assistant that summarizes GitHub profiles for a portfolio website.
 
 You must:
-- Write a short (1–2 sentence) **positive** summary about the user's skills and profile.
+- Write a short (2 sentence) **positive** summary about the user's skills and profile.
 - Rank the repositories by relevance (1 = most relevant).
 - Write 1–2 sentence summaries for each repository.
 - Return only valid **pure JSON** — no comments, no extra text, no markdown, nothing else.

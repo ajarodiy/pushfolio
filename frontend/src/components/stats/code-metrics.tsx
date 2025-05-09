@@ -15,28 +15,16 @@ interface CodeMetricsProps {
 export const CodeMetrics = ({ metrics }: CodeMetricsProps) => {
   const metricsItems = [
     {
-      name: "Lines of Code",
-      value: metrics.totalLinesOfCode.toLocaleString(),
-      icon: <FileCode2 className="h-5 w-5 text-yellow-400" />,
-      description: "Total lines of code written",
-    },
-    {
       name: "Repositories",
       value: metrics.totalRepositories,
       icon: <GalleryVerticalEnd className="h-5 w-5 text-yellow-400" />,
       description: "Public repositories created",
     },
     {
-      name: "Active Days",
-      value: metrics.activeDays,
-      icon: <CalendarDays className="h-5 w-5 text-yellow-400" />,
-      description: "Days with coding activity",
-    },
-    {
       name: "Contributors",
       value: metrics.totalContributors,
       icon: <Users className="h-5 w-5 text-yellow-400" />,
-      description: "People contributed to repos",
+      description: "People who contributed to repos",
     },
     {
       name: "Stars Earned",

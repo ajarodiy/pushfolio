@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Query
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from backend.firestore import db
 from backend.github_fetcher import fetch_github_user, fetch_github_repos, fetch_repo_languages
 from backend.openai_client import generate_profile_summary
@@ -18,7 +18,7 @@ async def get_profile(username: str, forceRefresh: bool = Query(False)):
         
         if last_updated_str:
             last_updated = datetime.fromisoformat(last_updated_str)
-            if datetime.utcnow() - last_updated < timedelta(hours=24):
+            if datetime.now(timezone.utc) - last_updated < timedelta(hours=24):
                 return {"source": "cache", "data": cached_data}
 
     # Fetch from GitHub
@@ -72,8 +72,45 @@ async def get_profile(username: str, forceRefresh: bool = Query(False)):
 
         profile["topRepositories"] = sorted(profile["topRepositories"], key=lambda r: r["rank"])
     
+    # Generate stats from topRepositories
+    top_repos = profile["topRepositories"]
+    total_repos = len(top_repos)
+    total_stars = sum(repo["stars"] for repo in top_repos)
+    total_contributors = 0
+
+    # Optional: count contributors
+    import requests
+    for repo in repos_data:
+        if "contributors_url" in repo:
+            try:
+                res = requests.get(repo["contributors_url"])
+                if res.status_code == 200:
+                    total_contributors += len(res.json())
+            except:
+                pass
+
+    # Build language distribution
+    lang_count = {}
+    for repo in top_repos:
+        for lang in repo["techStack"]:
+            lang_count[lang] = lang_count.get(lang, 0) + 1
+
+    languages = [
+        {"name": lang, "percentage": count / total_repos, "linesOfCode": count * 1000}
+        for lang, count in lang_count.items()
+    ]
+
+    profile["stats"] = {
+        "metrics": {
+            "totalRepositories": total_repos,
+            "totalStars": total_stars,
+            "totalContributors": total_contributors
+        },
+        "languages": languages
+    }
+    
     # Save to Firestore
-    profile["lastUpdated"] = datetime.now(datetime.timezone.utc).isoformat()
+    profile["lastUpdated"] = datetime.now(timezone.utc).isoformat()
     doc_ref.set(profile)
 
     return {"source": "github+ai", "data": profile}

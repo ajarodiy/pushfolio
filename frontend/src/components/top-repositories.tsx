@@ -1,15 +1,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { 
-  Star, 
-  GitFork, 
-  Eye,
-  Clock,
-  ChevronRight,
-  Code,
-  Layers
-} from 'lucide-react';
+import { ChevronRight, Code } from 'lucide-react';
 import type { Repository } from '@/types/github';
 import { RepositoryCard } from '@/components/repository-card';
 
@@ -19,9 +11,8 @@ interface TopRepositoriesProps {
 
 export const TopRepositories = ({ repositories }: TopRepositoriesProps) => {
   const [showAll, setShowAll] = useState(false);
-  
   const displayedRepos = showAll ? repositories : repositories.slice(0, 4);
-  
+
   return (
     <section className="scroll-m-20">
       <Card className="border-yellow-500/30">
@@ -35,10 +26,10 @@ export const TopRepositories = ({ repositories }: TopRepositoriesProps) => {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             {displayedRepos.map((repo) => (
-              <RepositoryCard key={repo.id} repository={repo} />
+              <RepositoryCard key={repo.name} repository={repo} />
             ))}
           </div>
-          
+
           {repositories.length > 4 && (
             <div className="flex justify-center">
               <Button

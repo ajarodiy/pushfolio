@@ -8,9 +8,10 @@ export const LoadingState = () => {
         <div className="flex flex-col items-center space-y-4">
           <Loader2 className="h-12 w-12 text-yellow-500 animate-spin" />
           <div className="space-y-2 text-center">
-            <h3 className="text-xl font-medium">Analyzing GitHub Profile</h3>
+            <h3 className="text-xl font-medium">Warming Up the Backend</h3>
             <p className="text-sm text-muted-foreground max-w-md">
-              We're fetching and analyzing the GitHub data to generate an AI-enhanced portfolio visualization...
+              The server is starting up — it may take 20–30 seconds if this is the first request.
+              After that, everything will load instantly.
             </p>
           </div>
         </div>

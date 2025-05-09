@@ -10,23 +10,24 @@ import {
 import type { LanguageData } from '@/types/github';
 
 interface LanguageStatsProps {
-  languages: LanguageData[];
+  languages: LanguageData[] | undefined;
 }
 
 export const LanguageStats = ({ languages }: LanguageStatsProps) => {
-  // Colors for different languages
   const COLORS = [
-    '#EAB308', // Yellow
-    '#F59E0B', // Amber
-    '#F97316', // Orange
-    '#EF4444', // Red
-    '#A3E635', // Lime
-    '#10B981', // Emerald
-    '#06B6D4', // Cyan
-    '#0EA5E9', // Light Blue
-    '#8B5CF6', // Violet
-    '#EC4899', // Pink
+    '#EAB308', '#F59E0B', '#F97316', '#EF4444', '#A3E635',
+    '#10B981', '#06B6D4', '#0EA5E9', '#8B5CF6', '#EC4899',
   ];
+
+  if (!languages || !Array.isArray(languages) || languages.length === 0) {
+    return (
+      <Card className="p-4">
+        <p className="text-sm text-muted-foreground">
+          No language data available.
+        </p>
+      </Card>
+    );
+  }
 
   return (
     <Card className="p-4">
@@ -49,12 +50,14 @@ export const LanguageStats = ({ languages }: LanguageStatsProps) => {
               paddingAngle={5}
               dataKey="percentage"
               nameKey="name"
-              label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+              label={({ name, percent }) =>
+                `${name} (${(percent * 100).toFixed(0)}%)`
+              }
               labelLine={false}
             >
               {languages.map((entry, index) => (
                 <Cell
-                  key={`cell-${index}`}
+                  key={`cell-${entry.name}`}
                   fill={COLORS[index % COLORS.length]}
                 />
               ))}

@@ -13,6 +13,14 @@ interface CommitHeatmapProps {
 }
 
 export const CommitHeatmap = ({ data }: CommitHeatmapProps) => {
+  if (!data || !Array.isArray(data)) {
+    return (
+      <Card className="p-4">
+        <p className="text-sm text-muted-foreground">No commit heatmap data available.</p>
+      </Card>
+    );
+  }
+  
   const [hoveredDay, setHoveredDay] = useState<HeatmapData | null>(null);
   
   // Group data by month and week for better organization

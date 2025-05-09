@@ -1,36 +1,29 @@
-import { useState, useEffect } from 'react';
-import { mockGitHubData } from '@/lib/mock-data';
-import type { GitHubDataResponse } from '@/types/github';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export const useGitHubData = (username: string | null) => {
-  const [data, setData] = useState<GitHubDataResponse | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     if (!username) return;
-    
+
     const fetchData = async () => {
       setIsLoading(true);
       setError(null);
-      
       try {
-        // In a real app, this would make an API call to a backend service
-        // For this demo, we'll use mock data and simulate a network request
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        
-        // Set mock data based on username
-        setData(mockGitHubData(username));
-      } catch (err) {
-        setError('Failed to fetch GitHub data. Please try again.');
-        console.error('Error fetching GitHub data:', err);
+        const res = await axios.get(`http://localhost:8000/api/profile/${username}`);
+        setData(res.data.data); // backend returns { source, data }
+      } catch (err: any) {
+        setError('Failed to fetch profile');
       } finally {
         setIsLoading(false);
       }
     };
-    
+
     fetchData();
   }, [username]);
-  
+
   return { data, isLoading, error };
 };
