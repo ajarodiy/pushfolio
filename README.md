@@ -1,54 +1,101 @@
-# React + TypeScript + Vite
+# 🚀 Pushfolio | AI-Powered GitHub Portfolio Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pushfolio is an AI-enhanced portfolio web app that analyzes your GitHub profile and generates an insightful, visually rich, and recruiter-friendly developer portfolio — in just one click.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Key Features
 
-## Expanding the ESLint configuration
+- 🧠 **AI-Powered Summaries**: Uses GPT-3.5-Turbo to generate a concise overview of your GitHub activity, strengths, and top repositories.
+- 📊 **Repo Ranking & Highlights**: Automatically ranks your top repositories and summarizes them for you.
+- 🌐 **Live GitHub Integration**: Fetches real-time GitHub user and repo data via the GitHub API.
+- 💾 **Caching with Firestore**: Smart caching layer that avoids redundant API/AI calls and stores summaries.
+- 🔁 **24hr Auto Refresh Logic**: Refreshes profiles after 24 hours or on manual force-refresh.
+- 📱 **Mobile-Responsive Design**: Fully responsive frontend with polished UI components and smooth transitions.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🧠 Tech Stack
+
+### 🔧 Frontend
+- **React.js** + TypeScript
+- **Vite** for bundling
+- **Tailwind CSS** for styling
+- **ShadCN UI** + Lucide Icons for components
+- **Framer Motion** for subtle UI animations
+
+### ⚙️ Backend
+- **FastAPI** for API endpoints
+- **OpenAI GPT-4** for summaries and repo insights
+- **Google Firestore (Firebase)** for caching user data
+- **GitHub REST API** for profile and repo data
+
+---
+
+## 🗂️ System Workflow
+
+1. User searches for a GitHub username.
+2. Backend checks Firestore cache:
+   - If fresh (<24hrs), return cached profile.
+   - If expired or missing, fetch GitHub data and call OpenAI.
+3. OpenAI returns:
+   - Profile summary
+   - Top repositories + ranked insights
+4. Results are saved in Firestore with a `lastUpdated` timestamp.
+5. Frontend renders everything beautifully using Tabs and Cards.
+
+---
+
+## 🔐 CORS & Deployment
+
+- CORS restricted to production domain (e.g. `https://ajarodiy.me`)
+- Render for backend hosting
+- Vercel for frontend deployment (supports subpath routing via `vite.config.ts` base)
+
+---
+
+## ⚙️ Run Locally
+
+### 1. Backend (FastAPI)
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2. Frontend (Vite + React)
+```bash
+cd frontend
+npm install
+npm run dev
 ```
+
+Then go to `http://localhost:5173` and try searching a GitHub username.
+
+---
+
+## 🔥 Example Output
+
+- *"Aditya is a passionate developer with strong experience in ML, backend systems, and problem solving."*
+- *"Top repo: `leetcode-advisor` – A smart Chrome Extension using GPT-3.5 to assist LeetCode users."*
+
+---
+
+## 🎯 Future Plans
+
+- Support for GitHub contribution graph parsing
+- Add Open Graph tags for rich link previews
+- Deploy user-specific public portfolio URLs (e.g., `/ajarodiy`)
+- Add contributor avatars and commit stats
+
+---
+
+## 📜 License
+
+MIT
+
+---
+
+## 🤝 Contributions Welcome
+
+Spotted a bug? Have an enhancement idea? PRs and issues are open!
