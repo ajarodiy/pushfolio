@@ -26,7 +26,7 @@ Pushfolio is an AI-enhanced portfolio web app that analyzes your GitHub profile 
 
 ### ⚙️ Backend
 - **FastAPI** for API endpoints
-- **OpenAI GPT-4** for summaries and repo insights
+- **OpenAI GPT-3.5-Turbo** for summaries and repo insights
 - **Google Firestore (Firebase)** for caching user data
 - **GitHub REST API** for profile and repo data
 
